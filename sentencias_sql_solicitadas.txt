@@ -1,0 +1,16 @@
+/******PRODUCTO CON MÁS STOCK**********/
+SELECT p.id as id, p.nombre as nombre, p.stock as stock
+FROM producto p
+WHERE p.stock = ( 
+SELECT MAX(stock) FROM producto)
+
+
+/******PRODUCTO MÁS VENDIDO*********/
+SELECT p.nombre, 
+SUM(v.cantidad_vendido) as cantidad 
+FROM venta v 
+INNER JOIN
+producto p
+ON v.id_producto = p.id
+GROUP BY v.id_producto
+ORDER BY SUM(v.cantidad_vendido) DESC LIMIT 1

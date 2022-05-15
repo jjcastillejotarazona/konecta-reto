@@ -1,0 +1,9 @@
+#bloquea el acceso a directorios FORBIDEN
+Options All -Indexes
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#nos permite trabajar con arquitectura MVC, urls amigables
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
